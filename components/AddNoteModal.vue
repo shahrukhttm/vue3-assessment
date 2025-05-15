@@ -7,6 +7,7 @@
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 28L28 12M28 28L12 12" stroke="#0A0C11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
         </div>
+        <!-- this is in-progress we need this elements in future -->
         <!-- <div class="space-y-3">
             <input v-model="title" type="text" placeholder="Title" class="w-full p-2 border rounded" />
             <textarea v-model="description" placeholder="Description" class="w-full p-2 border rounded" />
@@ -91,7 +92,7 @@
   
   <script setup>
   import { ref } from 'vue'
-  import { useNoteStore } from '@/stores/noteStore'
+  import { useNotesStore } from '~/stores/notes'
   
   const showOption = ref(false)
 
@@ -102,7 +103,7 @@
   const description = ref('')
   const image = ref('')
   
-  const store = useNoteStore()
+  const store = useNotesStore()
   
   function addNote() {
     store.addNote({ title: title.value, description: description.value, image: image.value })

@@ -11,8 +11,8 @@
 import Header from '@/components/Header.vue'
 import NoteCard from '@/components/NoteCard.vue'
 import AddNoteModal from '@/components/AddNoteModal.vue'
-import { useNoteStore } from '@/stores/noteStore'
+import { useNotesStore } from '~/stores/notes'
 
-const store = useNoteStore()
+const store = useNotesStore()
 const showModal = ref(false)
 </script>
