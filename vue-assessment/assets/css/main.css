@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+    padding: 13px 24px;
+    font-weight: 600;
+    color: white;
+    border-radius: 100rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn:has(.icon+span, svg+span) {
+    padding: 10px 20px 10px 14px;
+}
+
+.btn:has(span+.icon, span+svg) {
+    padding: 10px 14px 10px 20px;
+}
+
+.btn-primary {
+    @apply bg-blue transition hover:bg-blue-hover;
+}
+
+.btn-success {
+    @apply bg-success transition hover:bg-success-hover;
+}
+
+.btn.btn-primary:disabled {
+    @apply bg-grey-600;
+}
+
+.custom-checkbox {
+    @apply appearance-none mt-[2px] h-4 w-4 min-w-4 border border-[#3D4D5A] rounded-[4px] cursor-pointer;
+    background-color: transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.custom-checkbox:checked {
+    @apply bg-blue;
+    background-image: url('../images/check.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    border: none;
+}
+
+.filter-dropdown>div:has(.custom-checkbox:checked),
+.custom-select-box .filter-dropdown .selected {
+    background-color: rgba(0, 123, 255, 0.15);
+}
+
+.floating-form-control {
+    position: relative;
+    display: flex;
+}
+
+.floating-form-control .form-label,
+.custom-select-box.selected label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 18px 16px;
+    font-weight: 700;
+    pointer-events: none;
+    transform-origin: 0 0;
+    transition: opacity .1s ease-in-out, transform .1s ease-in-out;
+}
+
+.floating-form-control .form-input,
+/* .floating-form-control .form-select, */
+.floating-form-control .form-textarea,
+.custom-select {
+    @apply bg-dark-100;
+    padding: 18px 16px;
+    border-radius: 16px;
+    width: 100%;
+    border: 1px solid transparent;
+}
+
+.floating-form-control .form-input::placeholder,
+.floating-form-control .form-textarea::placeholder {
+    color: transparent;
+}
+
+/* .floating-form-control .form-select {
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url('../images/trailing-icon.svg');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 16px) center;
+    padding: 18px 40px 18px 16px;
+} */
+
+.floating-form-control .form-input:focus,
+.floating-form-control .form-input:not(:placeholder-shown),
+/* .floating-form-control .form-select, */
+.floating-form-control .form-textarea:focus,
+.floating-form-control .form-textarea:not(:placeholder-shown) {
+    padding: 26px 16px 10px;
+}
+
+.custom-select-box.selected .custom-select {
+    padding: 26px 40px 10px 16px;
+}
+
+.floating-form-control .form-input:focus~label,
+.floating-form-control .form-input:not(:placeholder-shown)~label,
+/* .floating-form-control .form-select~label, */
+.floating-form-control .form-textarea:focus~label,
+.floating-form-control .form-textarea:not(:placeholder-shown)~label {
+    transform: scale(.85) translateY(-.5rem) translateX(.2rem);
+}
+
+.floating-form-control .form-input:focus~label,
+/* .floating-form-control .form-select~label, */
+.floating-form-control .form-textarea:focus~label,
+.custom-select-box.is-open .custom-select label {
+    @apply text-blue;
+}
+
+.form-input:focus,
+/* .form-select, */
+.form-textarea:focus,
+.custom-select-box.is-open .custom-select {
+    border: 1px solid #007AFF;
+    box-shadow: 0px 0px 0px 3px #D9EBFF;
+    outline: none;
+}
+
+.custom-select-box.selected label {
+    transform: scale(.85) translateY(-.5rem) translateX(.2rem);
+}
