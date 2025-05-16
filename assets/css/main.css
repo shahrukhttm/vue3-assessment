@@ -29,6 +29,18 @@
     @apply bg-success transition hover:bg-success-hover;
 }
 
+.btn-danger-light {
+    @apply bg-red-100 text-red;
+}
+
+.btn-grey {
+    @apply bg-dark-400 text-dark-950;
+}
+
+.btn-grey-light {
+    @apply bg-dark-100 text-dark-950;
+}
+
 .btn.btn-primary:disabled {
     @apply bg-grey-600;
 }

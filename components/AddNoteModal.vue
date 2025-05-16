@@ -4,12 +4,12 @@
             class="bg-white rounded-2xl sm:p-[22px] p-4 m-4 w-full max-w-[496px] max-h-[calc(100svh-32px)] overflow-y-auto">
             <div class="mb-[22px] flex items-center gap-4 justify-between">
                 <h3 class="text-display-sm font-bold">Create New Cart</h3>
-                <button @click="emit('close')">
+                <UtilityButton @click="emit('close')" ariaLabel="Close modal" >
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 28L28 12M28 28L12 12" stroke="#0A0C11" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                </button>
+                </UtilityButton>
             </div>
             <div class="flex flex-col gap-4">
                 <div :class="['custom-select-box relative', { 'is-open': showOption }, { 'selected': selectedType }]">
@@ -37,11 +37,7 @@
                 </div>
 
                 <!-- Common Fields (Header and Description) -->
-                <div class="floating-form-control">
-                    <input v-model="title" type="text" name="header" id="header" placeholder="Header"
-                        class="form-input">
-                    <label for="header" class="form-label">Header</label>
-                </div>
+                <UtilityInput id="header" label="header" v-model="title" />
 
                 <!-- Type 1 Specific Fields -->
                 <template v-if="selectedType === 'Type1'">
@@ -69,11 +65,11 @@
                     </div>
                 </template>
 
-                <div class="floating-form-control">
-                    <textarea v-model="description" name="description" id="description" rows="4"
-                        placeholder="Description" class="form-textarea min-h-[128px]"></textarea>
-                    <label for="description" class="form-label">Description</label>
-                </div>
+                <UtilityTextarea
+                id="description"
+                label="Description"
+                v-model="description"
+                />
 
                 <!-- Type 3 Specific Fields -->
                 <template v-if="selectedType === 'Type3'">
@@ -87,7 +83,7 @@
                                         :id="'checklistItem' + index" placeholder="Checklist item"
                                         class="form-input bg-dark-100 w-full px-4 py-[14px] rounded-2xl border border-transparent placeholder:text-dark-950">
                                 </div>
-                                <button @click="removeChecklistItem(index)">
+                                <UtilityButton @click="removeChecklistItem(index)" >
                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -97,26 +93,31 @@
                                             d="M15.125 11.6875H6.875C6.49 11.6875 6.1875 11.385 6.1875 11C6.1875 10.615 6.49 10.3125 6.875 10.3125H15.125C15.51 10.3125 15.8125 10.615 15.8125 11C15.8125 11.385 15.51 11.6875 15.125 11.6875Z"
                                             fill="black" />
                                     </svg>
-                                </button>
+                                </UtilityButton>
                             </li>
                             <li>
-                                <button @click="addChecklistItem" class="btn btn-success w-full">
+                                <UtilityButton @click="addChecklistItem" class="btn btn-success w-full" >
                                     <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path d="M13.25 8H3.25M8.25 3V13" stroke="white" stroke-width="2.3"
                                             stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                     <span>Add option</span>
-                                </button>
+                                </UtilityButton>
                             </li>
                         </ul>
                     </div>
                 </template>
 
-                <div>
-                    <button @click="addNote" class="btn btn-primary w-full" :disabled="!isFormValid">
-                        Create
-                    </button>
+                <div class="mt-[6px] pt-[22px] border-t border-dashed border-dark-400">
+                    <UtilityButton @click="addNote" class="btn btn-primary w-full" :disabled="!isFormValid" >
+                        <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.25 8H3.25M8.25 3V13" stroke="white" stroke-width="2.3"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Create</span>
+                    </UtilityButton>
                 </div>
             </div>
         </div>
@@ -171,7 +172,7 @@ function handleImageUpload(event) {
 }
 
 const isFormValid = computed(() => {
-    if (!selectedType.value || !title.value) return false
+    if (!selectedType.value || !title.value || !description.value) return false
 
     if (selectedType.value === 'Type3') {
         return checklistItems.value.every(item => item.text.trim() !== '')
