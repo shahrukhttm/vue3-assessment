@@ -3,8 +3,8 @@ import { defineStore } from 'pinia'
 export const useFilterStore = defineStore('filters', {
   state: () => ({
     filters: {
-      types: [], // Default selected filters
-      allTypes: ['Type1', 'Type2', 'Type3', 'Type4'] // All available types
+      types: ['Type1', 'Type2', 'Type3'], // Default selected filters
+      allTypes: ['Type1', 'Type2', 'Type3'] // All available types
     },
     showFilters: false
   }),

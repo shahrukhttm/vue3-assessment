@@ -38,9 +38,8 @@
                 </button>
             </div>
         </div>
-        <div class="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-x-6 gap-y-[22px]">
-        <template v-for="(note, key) in filteredNotes" :key="key">
-            <div class="bg-white rounded-2xl sm:p-[22px] p-4 flex flex-col sm:gap-[22px] gap-4">
+        <div v-if="filteredNotes" class="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-x-6 gap-y-[22px]">
+            <div v-for="(note, key) in filteredNotes" :key="key" class="bg-white rounded-2xl sm:p-[22px] p-4 flex flex-col sm:gap-[22px] gap-4">
                 <h3 class="font-semibold text-[17px]/[22px]">
                     {{ note.title }}
                 </h3>
@@ -49,7 +48,7 @@
                     v-if="note.image"
                     :src="note.image"
                     alt="note image"
-                    class="w-full bg-[#D9D9D9] rounded-xl"
+                    class="w-full bg-[#D9D9D9] rounded-xl aspect-video object-cover"
                 />
                 
                 <p v-if="note.description" class="whitespace-pre-line">{{ note.description }}</p>
@@ -69,8 +68,16 @@
                     </li>
                 </ul>
             </div>
+        </div>
+        <template v-else>
+            <div class="flex flex-col items-center justify-center py-12 px-4 text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                </svg>
+                <h4 class="text-xl font-medium text-gray-600 mb-2">No Record Found!</h4>
+                <p class="text-gray-500 max-w-md">We couldn't find any records matching your criteria. Try adjusting your search or filters.</p>
+            </div>
         </template>
-    </div>
         <AddNoteModal :show="showModal" @close="showModal = false" />
     </Layout>
 </template>
@@ -78,9 +85,8 @@
 <script setup>
 import { ref } from 'vue'
 import Layout from '@/layouts/Layout.vue'
-// import NoteCard from '@/components/NoteCard.vue'
 import AddNoteModal from '@/components/AddNoteModal.vue'
-import { useNotesStore } from '~/stores/notes'
+import { useNotesStore } from '@//stores/notes'
 import { useFilterStore } from '@/stores/filters'
 
 const filterStore = useFilterStore()
@@ -94,13 +100,15 @@ const notes = useNotesStore()
 // Create a function to display notes based on selected filters
 const filteredNotes = computed(() => {
   const activeFilters = filterStore.filters.types
-  if (activeFilters.includes('All') || activeFilters.length === 0) {
-    return notes.notes.all
-  }
-  
-  return notes.notes.all.filter(note => {
-    return activeFilters.some(filter => note.type.toLowerCase() === filter.toLowerCase())
-  })
+    if( activeFilters.length == 0 ){
+        return;
+    }
+    if (activeFilters.includes('All') || activeFilters.length === 0) {
+        return notes.notes.all
+    }
+    return notes.notes.all.filter(note => {
+        return activeFilters.some(filter => note.type.toLowerCase() === filter.toLowerCase())
+    })
 })
 
 </script>

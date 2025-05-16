@@ -9,10 +9,5 @@
 
 <script setup>
 import Header from '@/components/Header.vue'
-import NoteCard from '@/components/NoteCard.vue'
-import AddNoteModal from '@/components/AddNoteModal.vue'
-import { useNotesStore } from '~/stores/notes'
 
-const store = useNotesStore()
-const showModal = ref(false)
 </script>

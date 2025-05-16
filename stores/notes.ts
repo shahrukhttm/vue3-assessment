@@ -25,15 +25,6 @@ export const useNotesStore = defineStore('notes', {
           ],
         },
         {
-          type: 'type4',
-          title: 'Lorem ipsum dolor sit amet',
-          description: 'Checklist example...',
-          checklist: [
-            { text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua`, checked: true },
-            { text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua`, checked: false },
-          ],
-        },
-        {
           type: 'type1',
           title: 'Lorem ipsum dolor sit amet',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
